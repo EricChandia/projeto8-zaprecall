@@ -313,6 +313,10 @@ span{
     width: 100%;
 }
 
+.espaco-b{
+    height: 160px;
+}
+
 .footer ion-icon{
     font-size: 25px;
 }

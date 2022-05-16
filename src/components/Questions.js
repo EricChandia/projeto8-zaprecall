@@ -70,7 +70,7 @@ export default function Questions(){
         </span>
         <div className="flashcards">
             {flashcards.map((flashcard, index) => <Flashcard question={flashcard.question} answer={flashcard.answer} addnaolembrei={addNaoLembrei} addquasenaolembrei={addQuaseNaoLembrei} addzap={addZap} card={index}/>)}
-            <div className="espaco"></div>
+            <div className={qtdZaps !== zapsLenght ? "espaco" : "espaco espaco-b"}></div>
         </div>
 
         <div className={qtdZaps !== zapsLenght ? "footer" : "footer footer-a"}>
