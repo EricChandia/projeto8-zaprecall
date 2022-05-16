@@ -5,7 +5,7 @@ import party from "../assets/img/party.png"
 import sad from "../assets/img/sad.png"
 
 function carregarFlashcards(){
-    return([
+    let flashcards = [
         {id: 1, question: "O que é JSX?", answer: "JSX é uma sintaxe para escrever HTML dentro do JS"}, 
         {id: 2, question: "O React é __?", answer: "uma biblioteca JavaScript para construção de interfaces"}, 
         {id: 3, question: "Componentes devem iniciar com", answer: "maiúscula"},
@@ -13,8 +13,12 @@ function carregarFlashcards(){
         {id: 5, question: "ReactDOM nos ajuda __ ", answer: "interagindo com a DOM para colocar componentes React na mesma"},
         {id: 6, question: "Usamos o npm para __", answer: "gerenciar os pacotes necessários e suas dependências"},
         {id: 7, question: "Usamos props para __ ", answer: "passar diferentes informações para componentes"},
-        {id: 8, question: "estado (state) para __ ", answer: "dizer para o React quais informações quando atualizadas devem renderizar a tela novamente"},
-    ]);
+        {id: 8, question: "a forma correta de atualizar o estado de um tipo de dado não primitivo no React", answer: "[...objeto, NovoItem]"}
+    ];
+
+    flashcards = flashcards.sort( () => Math.random() - 0.5);
+    console.log(flashcards);
+    return(flashcards);
 }
 
 
@@ -101,6 +105,7 @@ function Concluido(props){
 
 
     for(let i=0;i<props.zaps.length;i++){
+        console.log(props.zaps[i]);
         if(props.zaps[i] === "naoLembrei"){
             return(
                 <div className="concluido">
@@ -109,15 +114,16 @@ function Concluido(props){
                 </div>
                 ); 
 
-        }else{
+        }
+    }
             return(
                 <div className="concluido">
                     <span><img src={party} alt=""/><strong>Parabéns!</strong></span>
                     Você não esqueceu de nenhum flashcard!
                 </div>
                 );
-        }
-    }
+        
+    
 
 
 
@@ -126,8 +132,9 @@ function Concluido(props){
 
 }
 
+const flashcards = carregarFlashcards();
 export default function Questions(){
-    const flashcards = carregarFlashcards();
+    
     const zapsLenght = flashcards.length;
 
     const [zaps, setZaps] = React.useState([]);
