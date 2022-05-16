@@ -1,8 +1,9 @@
 import React from "react";
+import Flashcard from "./Flashcards";
+import Concluido from "./Concluido";
+import Acertos from "./Acertos";
+
 import image1 from "../assets/img/image1.png"
-import setinha from "../assets/img/setinha.png"
-import party from "../assets/img/party.png"
-import sad from "../assets/img/sad.png"
 
 function carregarFlashcards(){
     let flashcards = [
@@ -21,116 +22,6 @@ function carregarFlashcards(){
     return(flashcards);
 }
 
-
-function Flashcard(props){
-    const [flash, setFlash] = React.useState("flashcard");
-    const [flashClicked, setFlashClicked] = React.useState("flashcard-clicked none");
-    const [flashTurned, setFlashTurned] = React.useState("flashcard-turned none");
-    const [flashAnswered, setFlashAnswered] = React.useState("flashcard-answered none");
-    const [ionIcon, setIonIcon] = React.useState("");
-
-    function showQuestion(){
-        setFlash("flashcard none");
-        setFlashClicked("flashcard-clicked");
-    }
-
-    function showAnswer(){
-        setFlashClicked("flashcard-clicked none");
-        setFlashTurned("flashcard-turned");
-    }
-
-    function showFlashcardAnswered(option){
-        setFlashTurned("flashcard-turned none");
-        setFlash("flashcard none");
-        
-
-        if(option === "naolembrei"){
-            setFlashAnswered("flashcard-answered wrong");
-            setIonIcon("close-circle");
-            props.addnaolembrei();
-            
-        }else if(option === "quasenaolembrei"){
-            setFlashAnswered("flashcard-answered almost");
-            setIonIcon("help-circle");
-            props.addquasenaolembrei();
-        }else{
-            setFlashAnswered("flashcard-answered right");
-            setIonIcon("checkmark-circle");
-            props.addzap();
-        }
-        
-        
-        
-    }
-
-    return(
-        <div className="flashcard-container">
-            <div className={flash} >
-                <span className="question">Pergunta {props.card +1}</span>
-                <ion-icon name="play-outline" onClick={showQuestion}></ion-icon>
-            </div>
-            <div className={flashClicked}>
-                {props.question}
-                <img src={setinha} alt="setinha" onClick={showAnswer}/>
-            </div>
-            <div className={flashTurned}>
-                {props.answer}
-                <span className="botoes">
-                    <div className="nao-lembrei" onClick={() => showFlashcardAnswered("naolembrei")}>Não lembrei</div>
-                    <div className="quase-nao-lembrei" onClick={() => showFlashcardAnswered("quasenaolembrei")}>Quase não lembrei</div>
-                    <div className="zap" onClick={() => showFlashcardAnswered("zap")}>Zap!</div>
-                </span>
-            </div>
-            <div className={flashAnswered}>
-                    Pergunta {props.card +1}
-                    <ion-icon name={ionIcon}></ion-icon>
-            </div>
-    </div>
-    );
-}
-
-function Acertos(props){
-    //console.log(props.escolha);
-    if(props.escolha === "naoLembrei")
-    {
-        return(<ion-icon name="close-circle" color="danger"></ion-icon>);
-    }else if(props.escolha === "quaseNaoLembrei"){
-        return(<ion-icon name="help-circle" color="warning"></ion-icon>);
-    }else{
-        return(<ion-icon name="checkmark-circle" color="success"></ion-icon>);
-    }
-}
-
-function Concluido(props){
-
-
-    for(let i=0;i<props.zaps.length;i++){
-        console.log(props.zaps[i]);
-        if(props.zaps[i] === "naoLembrei"){
-            return(
-                <div className="concluido">
-                    <span><img src={sad} alt=""/><strong>Puts...</strong></span>
-                    Ainda faltam alguns... Mas não desanime!
-                </div>
-                ); 
-
-        }
-    }
-            return(
-                <div className="concluido">
-                    <span><img src={party} alt=""/><strong>Parabéns!</strong></span>
-                    Você não esqueceu de nenhum flashcard!
-                </div>
-                );
-        
-    
-
-
-
-
-    
-
-}
 
 const flashcards = carregarFlashcards();
 export default function Questions(){
